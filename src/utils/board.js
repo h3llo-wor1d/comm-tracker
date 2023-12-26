@@ -2,7 +2,7 @@ import { BOARD_SECTIONS } from "../constants"
 import { getTasksByStatus } from "./tasks"
 
 export const initializeBoard = tasks => {
-  console.log(tasks)
+  // need to allow for saved indexes as well in the future for queue positions of songs
   const boardSections = {}
 
   Object.keys(BOARD_SECTIONS).forEach(boardSectionKey => {

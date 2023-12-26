@@ -37,8 +37,6 @@ const BoardSectionList = (props) => {
 
   const [activeTaskId, setActiveTaskId] = useState(null)
 
-  const [sections, setSections] = useState([]);
-
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -103,11 +101,29 @@ const BoardSectionList = (props) => {
     const activeIndex = boardSections[activeContainer].findIndex(
       task => task.id === active.id
     )
+    const currentTask = boardSections[activeContainer].filter(task => task.id === active.id)[0];
+
     const overIndex = boardSections[overContainer].findIndex(
       task => task.id === over?.id
     )
 
     if (activeIndex !== overIndex) {
+      //overIndex is the value of where we're moving to, currentTask is the actual task to send...
+      //overcontainer is the value of the new status of the item
+
+      fetch("http://localhost:7614/statusChange", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          who: currentTask.forId,
+          where: overContainer,
+          at: overIndex
+        })
+      })
+      console.log(overContainer, overIndex)
+      //currentTask.status;
       setBoardSections(boardSection => ({
         ...boardSection,
         [overContainer]: arrayMove(

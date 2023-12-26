@@ -24,7 +24,6 @@ export default function SubmitCommit(props) {
     const handleClose = () => setOpen(false);
 
     const submit = () => {
-        console.log("Submitting new commit")
         fetch('http://localhost:7614/commit', {
             method: "POST",
             headers: {
