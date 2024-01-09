@@ -1,10 +1,10 @@
 import React from "react"
-import BoardSectionList from "./components/BoardSectionList"
+import Page from "./page"
 
 
 function App() {
 
-  return <BoardSectionList />
+  return <Page />
 }
 
 export default App

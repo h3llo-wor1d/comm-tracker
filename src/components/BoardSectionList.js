@@ -160,7 +160,7 @@ const BoardSectionList = (props) => {
 
   return (
     loading ? 
-    <CircularProgress /> :
+    <CircularProgress style={{position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)"}}/> :
     <Container>
       <DndContext
         sensors={sensors}
