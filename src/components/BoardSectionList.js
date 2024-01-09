@@ -24,7 +24,9 @@ const BoardSectionList = (props) => {
   const [boardSections, setBoardSections] = useState({})
 
   useEffect(() => {
-    fetch("http://127.0.0.1:7614/refresh")
+    fetch("http://wrenchcommserverahdfkljhaskjfhlkajhf.loca.lt/refresh", {headers: {
+      "bypass-tunnel-reminder": true
+    }})
     .then(d => d.json())
     .then(r => {
       setTasks(r.data);
@@ -123,11 +125,11 @@ const BoardSectionList = (props) => {
       //let ind = overIndex === -1 ? 0 : overIndex;
       //console.log(boardSections[overContainer].length-1)
       //console.log(boardSections[overContainer].length-1 === ind)
-
-      fetch("http://localhost:7614/statusChange", {
+      fetch("http://wrenchcommserverahdfkljhaskjfhlkajhf.loca.lt/statusChange", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "bypass-tunnel-reminder": true
         },
         body: JSON.stringify({
           who: currentTask.forId,

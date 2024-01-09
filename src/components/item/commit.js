@@ -17,10 +17,11 @@ export default function Commit(props) {
         if (shouldDelete) {
             // delete the commit, sort by timestamp on bot
             console.log("deleting it...")
-            await fetch(`http://localhost:7614/deleteCommit`, {
+            await fetch(`http://wrenchcommserverahdfkljhaskjfhlkajhf.loca.lt/deleteCommit`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "bypass-tunnel-reminder": true
                 },
                 body: JSON.stringify({
                     "for": props.for,

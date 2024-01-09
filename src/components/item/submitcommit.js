@@ -24,10 +24,11 @@ export default function SubmitCommit(props) {
     const handleClose = () => setOpen(false);
 
     const submit = () => {
-        fetch('http://localhost:7614/commit', {
+        fetch('http://wrenchcommserverahdfkljhaskjfhlkajhf.loca.lt/commit', {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "bypass-tunnel-reminder": true
             },
             body: JSON.stringify({
                 type: commitType,

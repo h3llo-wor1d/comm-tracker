@@ -22,10 +22,11 @@ export default function Price(props) {
     const handleClose = () => setOpen(false);
 
     const submit = () => {
-        fetch('http://localhost:7614/price', {
+        fetch('http://wrenchcommserverahdfkljhaskjfhlkajhf.loca.lt/price', {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "bypass-tunnel-reminder": true
             },
             body: JSON.stringify({
                 price: parseInt(textValue),
