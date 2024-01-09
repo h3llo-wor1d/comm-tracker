@@ -22,7 +22,14 @@ const BoardSection = ({ id, title, tasks }) => {
         strategy={verticalListSortingStrategy}
       >
         <div ref={setNodeRef}>
-          {tasks.map(task => (
+          {
+          // todo: map the tasks in order as well, i can track this pretty easily I think?
+          /*
+            t.map((el, ind) => {
+              return t.filter(e => e.in === ind)[0]
+            }))
+          */
+          tasks.map(task => (
             <Box key={task.id} sx={{ mb: 2 }}>
               <SortableTaskItem id={task.id} task={task}>
                 <TaskItem task={task} />

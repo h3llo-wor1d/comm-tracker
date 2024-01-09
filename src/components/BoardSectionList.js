@@ -111,6 +111,19 @@ const BoardSectionList = (props) => {
       //overIndex is the value of where we're moving to, currentTask is the actual task to send...
       //overcontainer is the value of the new status of the item
 
+      // automatically bump all indexes behind the current one if it isn't at the end of the container
+      // if overIndex is -1, change it to 0.
+
+      // why the fuck am I doing this i'm so stupid just fucking send the fucking array holy shit hahahahahahahahahahahahahahahahahahahahahaha
+      // like no fucking seriously you can just send the fucking array bruhhhh
+
+      // i'll finish queue numbers later i'm not in the mood to work on this rn
+
+      //console.log(overIndex)
+      //let ind = overIndex === -1 ? 0 : overIndex;
+      //console.log(boardSections[overContainer].length-1)
+      //console.log(boardSections[overContainer].length-1 === ind)
+
       fetch("http://localhost:7614/statusChange", {
         method: "POST",
         headers: {
