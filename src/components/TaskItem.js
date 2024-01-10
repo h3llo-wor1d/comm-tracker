@@ -1,13 +1,16 @@
-import { CardActions, CardContent } from "@mui/material"
+import { Card, CardActions, CardContent } from "@mui/material"
 import RefLinks from "./item/refLinks"
 import Notes from "./item/notes"
 import SubmitCommit from "./item/submitcommit"
 import Price from "./item/price"
 import CommitHistory from "./item/commithistory"
+import { DragHandle } from "@mui/icons-material"
 
-const TaskItem = ({ task }) => {
+const TaskItem = ({ task, opacity }) => {
   return (
-    <div>
+    <div style={{position: "relative", width: "inherit", height: "inherit", opacity: opacity === undefined ? 1 : opacity}}>
+      <DragHandle className="pointer" style={{position: "absolute", top: "15px", right: "15px", zIndex: 1}}/>
+      <Card style={{position: "absolute", zIndex: -1, width: "100%", height: "100%", opacity: 1}}></Card>
       <CardContent>{task.for}</CardContent>
       <RefLinks links={
         Object.keys(task.userEmbed)

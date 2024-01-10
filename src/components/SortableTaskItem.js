@@ -11,12 +11,10 @@ const SortableTaskItem = ({ children, id, task }) => {
   } = useSortable({ id })
 
   return (
-    <div ref={setNodeRef} /*style={style} {...attributes} {...listeners}*/>
-      <Card style={{position: "relative", width: "auto", height: "auto"}}>
-        <DragHandle className="pointer" style={{position: "absolute", top: "15px", right: "15px"}} {...listeners} {...attributes} />
-        {children}
-      </Card>
-      
+    <div ref={setNodeRef} style={{height: "fit-content", width: "350px", position: "relative"}}/*style={style} {...attributes} {...listeners}*/>
+        <DragHandle className="pointer" style={{position: "absolute", top: "15px", right: "15px", zIndex: 2}} {...listeners} {...attributes} />
+        <Card style={{position: "absolute", zIndex: -1, width: "100%", height: "100%", opacity: 1}}></Card>
+        {children}  
     </div>
   )
 }

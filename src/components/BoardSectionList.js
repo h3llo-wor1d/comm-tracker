@@ -179,8 +179,8 @@ const BoardSectionList = (props) => {
               />
             </Grid>
           ))}
-          <DragOverlay dropAnimation={dropAnimation}>
-            {task ? <TaskItem task={task} /> : null}
+          <DragOverlay >
+            {task ? <TaskItem task={task} opacity={0.75} /> : null}
           </DragOverlay>
         </Grid>
       </DndContext>

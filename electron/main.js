@@ -10,7 +10,8 @@ const createMainWindow = () => {
     backgroundColor: 'white',
     webPreferences: {
       nodeIntegration: false
-    }
+    },
+    icon: path.join(__dirname, '../icons/icon.png')
   });
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({

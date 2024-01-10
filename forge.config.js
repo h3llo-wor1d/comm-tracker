@@ -1,6 +1,16 @@
+const path = require('path');
+
 module.exports = {
   packagerConfig: {
     asar: true,
+    icon: path.resolve(__dirname, '../icons/'),
+    ignore: [
+        "^\\/public$",
+        "^\\/src$",
+        "^\\/node_modules$",
+        "^\\/[.].+",
+        // [...]
+    ]
   },
   rebuildConfig: {},
   makers: [
