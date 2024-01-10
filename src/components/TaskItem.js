@@ -1,4 +1,4 @@
-import { Card, CardActions, CardContent } from "@mui/material"
+import { Button, Card, CardActions, CardContent } from "@mui/material"
 import RefLinks from "./item/refLinks"
 import Notes from "./item/notes"
 import SubmitCommit from "./item/submitcommit"
@@ -20,9 +20,18 @@ const TaskItem = ({ task, opacity }) => {
       } />
       <Notes details={task.userEmbed["Notes/Additional Information"]} />
       <CommitHistory details={task.commitHistory} for={task.forId} />
-      <CardActions style={{position: "relative"}}>
-        <SubmitCommit for={task.forId} />
-        <Price value={task.price} for={task.forId} />
+      <CardActions style={{position: "relative", display: "flex", flexDirection: "column"}}>
+        <div style={{width: "100%", position: 'relative'}}>
+          <SubmitCommit for={task.forId} />
+          <Price value={task.price} for={task.forId} />
+        </div>
+        <div style={{width: "100%", position: "relative", marginTop: "5px"}}>
+        {
+          task.commissionPage !== "" &&
+          <a href={`discord://discord.com/channels/1188233913550766090/${task.commissionPage}`} style={{position: "relative", marginLeft: -4}}><Button size="small">Open Discord</Button></a>
+        }
+        </div>
+        
       </CardActions>
     </div>
     

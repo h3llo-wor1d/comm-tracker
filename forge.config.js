@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: path.resolve(__dirname, '../icons/'),
+    icon: './src/icons/',
     ignore: [
         "^\\/public$",
         "^\\/src$",
