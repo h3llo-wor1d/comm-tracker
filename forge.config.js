@@ -8,9 +8,11 @@ module.exports = {
         "^\\/public$",
         "^\\/src$",
         "^\\/node_modules$",
+        //"/node_modules/(?!(@cliqz\\/adblocker-electron|cross-fetch)/).*",
         "^\\/[.].+",
+        "!\\/extensions\\/[.]."
         // [...]
-    ]
+    ],
   },
   rebuildConfig: {},
   makers: [
