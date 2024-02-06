@@ -1,5 +1,19 @@
 const path = require('path');
 
+const dependencies = [
+  "webidl-conversions",
+  "@cliqz/adblocker-electron",
+  "cross-fetch",
+  "node-fetch",
+  "@cliqz/adblocker-electron-preload",
+  "tldts-experimental",
+  "@cliqz/adblocker-content",
+  "original-fs",
+  "whatwg-url",
+  "tr46",
+  "tldts-core"
+]
+
 module.exports = {
   packagerConfig: {
     asar: true,
@@ -7,10 +21,10 @@ module.exports = {
     ignore: [
         "^\\/public$",
         "^\\/src$",
-        "^\\/node_modules$",
-        //"/node_modules/(?!(@cliqz\\/adblocker-electron|cross-fetch)/).*",
+        //"^\\/node_modules$",
+        //`/node_modules/(?!(${dependencies.join("|")})/).*`,
         "^\\/[.].+",
-        "!\\/extensions\\/[.]."
+        "!\\/icons\\/[.]."
         // [...]
     ],
   },
