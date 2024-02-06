@@ -1,11 +1,15 @@
-const { app, BrowserWindow, screen: electronScreen, session, Menu } = require('electron');
+const { app, BrowserWindow, screen: electronScreen, session, Tray, Menu } = require('electron');
 const path = require('path');
 const { chrome } = require('process');
 const url = require('url');
-//const fetch = require("cross-fetch");
-//const { ElectronBlocker } = require('@cliqz/adblocker-electron');
+const fetch = require('cross-fetch')
+const { ElectronBlocker, fullLists, FiltersEngine } = require('@cliqz/adblocker-electron');
+const { readFileSync, writeFileSync } = require("original-fs");
 
-const createMainWindow = () => {
+var mainWindowOpen = true;
+
+const createMainWindow = async () => {
+  mainWindowOpen = true;
   let mainWindow = new BrowserWindow({
     width: electronScreen.getPrimaryDisplay().workArea.width,
     height: electronScreen.getPrimaryDisplay().workArea.height,
@@ -19,11 +23,21 @@ const createMainWindow = () => {
     icon: path.join(__dirname, '../icons/icon.png')
   });
 
- 
+  
+  var adBlocker = await ElectronBlocker.fromLists(
+    fetch,
+    fullLists,
+    {
+    enableCompression: true
+    },
+    {
+    path: `engine.bin`, 
+    read: async (...args) => readFileSync(...args),
+    write: async (...args) => writeFileSync(...args),
+    }
+  );
 
-  /*ElectronBlocker.fromPrebuiltAdsAndTracking(fetch).then((blocker) => {
-    blocker.enableBlockingInSession(session.defaultSession);
-  });*/
+  adBlocker.enableBlockingInSession(session.defaultSession);
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
     pathname: path.join(__dirname, '/../build/index.html'),
@@ -67,10 +81,29 @@ const createMainWindow = () => {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+    mainWindowOpen = false;
   });
 };
 
 app.whenReady().then(async () => {
+
+  const tray = new Tray(path.join(__dirname, '../icons/icon.ico'))
+
+  tray.on('click', () => {
+    if (!mainWindowOpen) createMainWindow();
+  })
+
+  const menu = Menu.buildFromTemplate ([
+    {
+      label: 'Quit',
+      click() { 
+        app.quit()
+      }
+    }
+  ])
+
+  tray.setToolTip('Wrench Comm Tracker')
+  tray.setContextMenu(menu)
   /*await session.defaultSession.loadExtension(
     path.join(__dirname, '../extensions/ublock')
   )*/
@@ -87,7 +120,9 @@ app.whenReady().then(async () => {
 });
 
 app.on('window-all-closed', () => {
+  console.log("should be quitting, no?")
   if (process.platform !== 'darwin') {
     app.quit();
+    console.log("should quit, no?")
   }
 });
